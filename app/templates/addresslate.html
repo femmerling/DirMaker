@@ -7,7 +7,13 @@
 			{% for item in directories %}
 				<option value="{{item.id}}">{{item.name}}</option>
 			{% endfor %}
+      <option value="NewDir">New Root Directory</option>
+
 		</select>
+    <div style="display:none;" id="new-dir">
+      <label>New root directory:</label>
+      <input type="text" name="name" id="name" placeholder="Root Directory Name"/>
+    </div>
 		<hr/>
 		<table id="list-view">
 			<tr>

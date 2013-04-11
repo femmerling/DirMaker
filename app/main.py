@@ -53,7 +53,16 @@ def process_names():
 	json_payload = json.loads(request.data)
 	define = json_payload["head"]
 	rows = json_payload["rows"]
-	root_id = int(json_payload["root_id"])
+	if json_payload["root_id"]:
+		root_id = int(json_payload["root_id"])
+	else:
+		new_directory = Directories(name = json_payload["root_name"])
+		db.session.add(new_directory)
+		db.session.commit()
+		new_directory.root_id = new_directory.id
+		db.session.add(new_directory)
+		db.session.commit()
+		root_id = new_directory.id
 	first_name = None
 	last_name = None
 	middle_name = None

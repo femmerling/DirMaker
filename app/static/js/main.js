@@ -27,10 +27,16 @@ $(document).ready(function(){
 		});
 	});
 
+  $("#directory_id").change(function(){
+    if($("#directory_id").val() === "NewDir"){
+      $("#new-dir").show();
+    }
+  });
+
 	$('#process_items').click(function(){
 		heads_json = [];
 		rows_json = [];
-		root_id = $('#directory_id').val()
+		root_id = $('#directory_id').val();
 		total_col = parseInt($("#col-count").val());
 		total_row = parseInt($("#row-count").val());
 		i = 0;
@@ -50,10 +56,21 @@ $(document).ready(function(){
 			rows_json.push(row_data);
 			x++;
 		}
+    var new_root;
+    var data_items;
+    if ($('#name').val() !== ""){
+      new_root = $('#name').val();
+    }
+    if (root_id === "NewDir"){
+      data_items = JSON.stringify({rows:rows_json,head:heads_json,root_name:new_root,root_id:null});
+    }else{
+      data_items = JSON.stringify({rows:rows_json,head:heads_json,root_name:null,root_id:root_id});
+    }
+    data_items = 
 		$.ajax({
 			url:"/process",
 			type:"POST",
-			data:JSON.stringify({"rows":rows_json,head:heads_json,root_id:root_id}),
+			data:data_items,
 			contentType: 'application/json',
 			success: function(data){
 				alert("all data uploaded!");
