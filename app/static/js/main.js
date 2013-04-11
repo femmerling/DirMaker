@@ -34,6 +34,9 @@ $(document).ready(function(){
   });
 
 	$('#process_items').click(function(){
+		$('#notify-message').html('<b>please wait</b><br/>we are uploading your data to the server');
+		$('#notify').show();
+		$('#spotlight').show();
 		heads_json = [];
 		rows_json = [];
 		root_id = $('#directory_id').val();
@@ -73,8 +76,7 @@ $(document).ready(function(){
 			data:data_items,
 			contentType: 'application/json',
 			success: function(data){
-				alert("all data uploaded!");
-				window.location = "/";
+				$('#notify-message').html('<b>success</b><br/>all data uploaded successfully<br/><br/><input type="submit" id="success-button" onClick="window.location=\'/\'" value="ok thanks"/>');
 			}
 		});
 	});
