@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+      <h2>Ringsocial Bulk Uploader</h2><br/>
+      <p>Welcome!</p>
+      <p>To use the bulk uploader, simply choose the excel file you wish to upload and hit process.</p>
+      <form action="/selection" method="post" enctype="multipart/form-data">
+            <label>Addressbook Template File:</label>
+            <input type="file" name="file"><br/><br/>
+            <input type="submit" value="Process!">
+      </form>
+{% endblock %}

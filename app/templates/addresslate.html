@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block content %}
+		<h2>Map Contents</h2>
+		<p>Map your uploaded contents to the matching properties</p>
+		<label>Root Directory:</label>
+		<select id="directory_id" name="directory_id">
+			{% for item in directories %}
+				<option value="{{item.id}}">{{item.name}}</option>
+			{% endfor %}
+		</select>
+		<hr/>
+		<table id="list-view">
+			<tr>
+			{% for col in range(rows[0]|count) %}
+				<td id="x-{{col}}" style="background: #ccc">
+					<select style="width:120px" id="head-{{col}}" name="head-{{col}}">
+						<option value="ignore">ignore</option>
+						<option value="first_name">first name</option>
+						<option value="last_name">last name</option>
+						<option value="middle_name">middle name</option>
+						<option value="detail">detail</option>
+						<option value="level1">level 1</option>
+						<option value="level2">level 2</option>
+						<option value="level3">level 3</option>
+					</select>
+				</td>
+			{% endfor %}
+			</tr>
+			{% for row in range(rows|count) %}
+			<tr>
+				{% for col in range(rows[row]|count)%}
+				<td id="{{row}}-{{col}}" data-key="{{row}}-{{col}}" data-value="{{rows[row][col]}}">{{rows[row][col]}}</td>
+				{% endfor %}
+			</tr>
+			{% endfor %}
+		</table><br/>
+		<input type="hidden" id="col-count" value="{{rows[0]|count}}"/>
+		<input type="hidden" id="row-count" value="{{rows|count}}"/>
+		<input id="process_items" type="submit" value="process"/>
+{% endblock %}
